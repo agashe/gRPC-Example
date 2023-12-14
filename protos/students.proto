@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package main;
+option go_package = "./";
+
+service StudentOperations {
+  rpc FetchStudents (FetchStudentsRequest) returns (StudentsResponse) {}
+  rpc CreateStudent (CreateStudentRequest) returns (StudentsResponse) {}
+  rpc UpdateStudent (UpdateStudentRequest) returns (StudentsResponse) {}
+  rpc DeleteStudent (DeleteStudentRequest) returns (StudentsResponse) {}
+}
+
+message Student {
+  int32 id   = 1;
+  string name = 2;
+  int32 age   = 3;
+}
+
+message FetchStudentsRequest {
+  int32 id = 1;
+  string query = 2;
+  int32 perPage = 3;
+}
+
+message CreateStudentRequest {
+  string name = 1;
+  int32 age = 2;
+}
+
+message UpdateStudentRequest {
+  int32 id = 1;
+  string name = 2;
+  int32 age   = 3;
+}
+
+message DeleteStudentRequest {
+  int32 id = 1;
+}
+
+message StudentsResponse {
+  bool status = 1;
+  string message = 2;
+  repeated Student students = 3;
+}
